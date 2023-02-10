@@ -33,7 +33,7 @@ func Hellos(names []string) (map[string]string, error) {
 		}
 		// In the map, associate the retrieved message with
 		// the name.
-		messages[name] = message + "/n"
+		messages[name] = message
 	}
 	return messages, nil
 }

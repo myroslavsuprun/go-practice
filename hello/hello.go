@@ -13,7 +13,7 @@ func main() {
 	log.SetFlags(0)
 
 	// names for greetings
-	names := []string{"Myroslav", "James", "Mykhailo"}
+	names := []string{"Myroslav", "James", "Michael"}
 
 	messages, err := greetings.Hellos(names)
 
