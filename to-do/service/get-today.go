@@ -5,9 +5,8 @@ import (
 	"to-do/repository"
 )
 
-func getToday() ([]TodoShow, error) {
-
-	todos, err := repository.Get(repository.GetOpts{
+func (s *Service) GetToday() ([]TodoShow, error) {
+	todos, err := s.r.Get(repository.GetOpts{
 		Completed: true,
 		From:      fromToday(),
 	})

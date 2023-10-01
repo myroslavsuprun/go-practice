@@ -2,9 +2,8 @@ package service
 
 import "to-do/repository"
 
-func get() ([]TodoShow, error) {
-
-	todos, err := repository.Get(repository.GetOpts{
+func (s *Service) Get() ([]TodoShow, error) {
+	todos, err := s.r.Get(repository.GetOpts{
 		Completed: false,
 	})
 	if err != nil {
@@ -14,6 +13,7 @@ func get() ([]TodoShow, error) {
 	todosShow := getTodoShow(todos)
 
 	return todosShow, nil
+
 }
 
 type TodoShow struct {

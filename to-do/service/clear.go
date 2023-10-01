@@ -1,9 +1,7 @@
 package service
 
-import "to-do/repository"
-
-func clear() error {
-	err := repository.Clear()
+func (s *Service) Clear() error {
+	err := s.r.Clear()
 	if err != nil {
 		return err
 	}

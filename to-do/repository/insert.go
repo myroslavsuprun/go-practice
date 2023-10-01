@@ -1,16 +1,12 @@
 package repository
 
-import (
-	"to-do/db"
-)
-
 const insertSql = `
 		INSERT INTO todo (title, completed)
 		VALUES ($1, $2)
 `
 
-func Add(title string) error {
-	_, err := db.DB.Exec(insertSql, title, false)
+func (r *Repository) Add(title string) error {
+	_, err := r.db.Exec(insertSql, title, false)
 	if err != nil {
 		return err
 	}

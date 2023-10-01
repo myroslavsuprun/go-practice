@@ -14,9 +14,9 @@ var rootCmd = &cobra.Command{
 	},
 }
 
-func Execute(actions service.Actions) error {
+func Execute(actions service.IService) error {
 	rootCmd.AddCommand(addCmd(actions.Add), listCmd(actions.Get))
-	rootCmd.AddCommand(completeCmd(actions.Completed), clearCmd(actions.Clear))
+	rootCmd.AddCommand(completeCmd(actions.Complete), clearCmd(actions.Clear))
 	rootCmd.AddCommand(rmCmd(actions.Remove), todayCmd(actions.GetToday))
 	return rootCmd.Execute()
 }

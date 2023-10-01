@@ -2,8 +2,19 @@ package repository
 
 import (
 	"time"
-	"to-do/db"
 )
+
+type GetOpts struct {
+	Completed bool
+	From      string
+}
+
+type Todo struct {
+	Id        int
+	Title     string
+	Completed bool
+	CreatedAt string
+}
 
 const selectSql = `
 		SELECT id, title, completed, created_at
@@ -12,17 +23,12 @@ const selectSql = `
 		AND created_at > $2
 `
 
-type GetOpts struct {
-	Completed bool
-	From      string
-}
-
-func Get(opts GetOpts) ([]Todo, error) {
+func (r *Repository) Get(opts GetOpts) ([]Todo, error) {
 	if opts.From == "" {
 		opts.From = time.RFC3339
 	}
 
-	rows, err := db.DB.Query(selectSql, opts.Completed, opts.From)
+	rows, err := r.db.Query(selectSql, opts.Completed, opts.From)
 	if err != nil {
 		return nil, err
 	}

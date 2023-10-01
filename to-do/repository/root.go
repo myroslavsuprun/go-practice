@@ -1,10 +1,21 @@
 package repository
 
-type Todo struct {
-	Id        int
-	Title     string
-	Completed bool
-	CreatedAt string
+import (
+	"database/sql"
+)
+
+type Repository struct {
+	db *sql.DB
 }
 
-var todos []Todo
+type IRepository interface {
+	Add(string) error
+	Get(GetOpts) ([]Todo, error)
+	Complete(int) (string, error)
+	Remove(int) (string, error)
+	Clear() error
+}
+
+func Get(db *sql.DB) IRepository {
+	return &Repository{db: db}
+}

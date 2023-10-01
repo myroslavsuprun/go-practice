@@ -5,6 +5,7 @@ import (
 
 	"to-do/cmd"
 	dbC "to-do/db"
+	"to-do/repository"
 	"to-do/service"
 
 	"github.com/joho/godotenv"
@@ -17,9 +18,10 @@ func main() {
 	}
 	defer dbC.Disconnect(db)
 
-	actions := service.New()
+	r := repository.Get(db)
+	s := service.New(r)
 
-	err = cmd.Execute(actions)
+	err = cmd.Execute(s)
 	if err != nil {
 		log.Fatal(err)
 	}

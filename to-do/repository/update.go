@@ -11,7 +11,7 @@ const updateSql = `
 		RETURNING title;
 `
 
-func Completed(id int) (string, error) {
+func (r *Repository) Complete(id int) (string, error) {
 	var title string
 	err := db.DB.QueryRow(updateSql, true, id).Scan(&title)
 	if err != nil {
